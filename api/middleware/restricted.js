@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
       req.decodedToken = decoded;
       next();
     } catch (error) {
-      next({ status: 401, message: "token invalid" });
+      next({ status: 401, message: "invalid token" });
     }
   }
   /*
