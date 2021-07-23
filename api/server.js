@@ -16,4 +16,13 @@ server.use(express.json());
 server.use("/api/auth", authRouter);
 server.use("/api/jokes", restrict, jokesRouter); // only logged-in users should have access!
 
+// Disable error from next being `unused`...
+// error handling will not work without it.
+// eslint-disable-next-line no-unused-vars
+server.use((err, req, res, next) => {
+  res.status(err.status || 500).json({
+    message: err.message,
+    stack: err.stack,
+  });
+});
 module.exports = server;

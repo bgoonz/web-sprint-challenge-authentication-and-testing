@@ -48,7 +48,7 @@ router.post("/register", requiredFields, checkUserExists, (req, res, next) => {
 router.post("/login", requiredFields, checkUserExists, (req, res, next) => {
   if (req.user.exists === false) {
     next({ status: 400, message: "invalid credentials" });
-  } else if (bcrypt.compareSync(req.body.password.trim(), req.user.password)) {
+  } else if (bcrypt.compareSync(req.body.password, req.user.password)) {
     const token = makeToken(req.user);
     res.json({
       message: `Welcome, ${req.user.username}!`,
